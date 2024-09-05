@@ -1,20 +1,21 @@
 import os
 
+GITHUB_REPO_URL = "https://raw.githubusercontent.com/illuminat3/teams-emojis/main"
+
 def generate_markdown(directory, filetype):
     files = os.listdir(directory)
     markdown = f"## {filetype.capitalize()}\n\n"
     for file in files:
         if file.endswith(('.png', '.gif')):
             name = os.path.splitext(file)[0]
-            filepath = os.path.join(directory, file)
-            # Assuming the files are stored in the root of the repo
-            markdown += f"![{name}]({filepath})  \n"
+            file_url = f"{GITHUB_REPO_URL}/{directory}/{file}"
+            markdown += f"![{name}]({file_url})  \n"
     return markdown
 
 def main():
     # Define directories
-    gifs_dir = './gifs'
-    images_dir = './images'
+    gifs_dir = 'gifs'
+    images_dir = 'images'
 
     # Generate markdown sections
     gifs_markdown = generate_markdown(gifs_dir, 'gifs')
@@ -23,7 +24,7 @@ def main():
     # Create full markdown content
     readme_content = '''# teams-emojis
 
-With the new teams update allowing for custom emojis here are some of my favourites.
+With the new teams update allowing for custom emojis, here are some of my favorites.
 
 '''
 
